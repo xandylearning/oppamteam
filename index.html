@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Oppam Who's Who</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700;800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE warm and personal: each colleague collects their place in the family meet
+   IDEA the lanyard badge handed out at the registration desk, and the printed run sheet pinned beside it
+   PICTURE a hanging badge with strap, clip and punched slot: your name, your role, a line written for that role
+   COLOUR white paper, Oppam blue strap, navy ink, XandY sun for "you", stage colours only as bands and marks
+   TYPE Rubik for names and headings, Figtree for text
+   LAYOUT find: headline, one search, a blank badge waiting; role: badge left, reporting head and team right; phone: badge, buttons, lists */
+:root{color-scheme:light;--ink:#1f2447;--mute:#5f6480;--line:#e3e5ee;--paper:#fff;--tint:#f5f6fa;--blue:#3a57a8;--navy:#262c5c;--sun:#fac511;--green:#13804f}
+*{box-sizing:border-box;min-width:0}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:16px/1.5 Figtree,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Rubik,Figtree,sans-serif;margin:0;letter-spacing:-.015em}
+button{font:inherit;color:inherit}
+[hidden]{display:none!important}
+.in{max-width:1160px;margin:0 auto;padding-inline:max(4vw,16px)}
+svg.lucide{width:1em;height:1em;stroke-width:2;flex:none}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+/* controls */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 16px;border-radius:10px;border:1.5px solid var(--ink);background:var(--paper);cursor:pointer;font-weight:600;font-size:15px;text-decoration:none;color:var(--ink);white-space:nowrap}
+.btn:hover{background:var(--tint)}
+.btn.dark{background:var(--navy);border-color:var(--navy);color:#fff}
+.btn.dark:hover{background:#1a1f45}
+.btn.sun{background:var(--sun);border-color:var(--sun);color:var(--navy)}
+.btn.sun:hover{background:#efb900}
+.btn.full{width:100%}
+.btn[disabled]{opacity:.5;cursor:default}
+.ico{all:unset;box-sizing:border-box;width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:var(--mute);cursor:pointer;flex:none}
+.ico:hover{background:var(--tint);color:var(--ink)}
+.call{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:0 12px;border-radius:10px;border:1.5px solid #bfe3cf;color:var(--green);font-weight:600;font-size:14px;text-decoration:none;white-space:nowrap;background:#f3fbf6}
+.call:hover{background:#e3f5ea}
+.nocall{font-size:13px;color:#9a9eb5;white-space:nowrap}
+.link{all:unset;cursor:pointer;color:var(--blue);font-weight:600;display:inline-flex;align-items:center;gap:6px;min-height:44px}
+.link:hover{text-decoration:underline}
+/* search */
+.sbox{position:relative}
+.sbox>svg,.sbox>i{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--mute);font-size:20px;pointer-events:none}
+.sbox input{width:100%;font:17px Figtree,sans-serif;padding:0 16px 0 48px;height:52px;border-radius:12px;border:1.5px solid #c9ccdc;background:var(--paper);color:var(--ink)}
+.sbox input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px #fde89a}
+.drop{position:absolute;left:0;right:0;top:calc(100% + 6px);background:var(--paper);border:1.5px solid var(--ink);border-radius:12px;padding:4px;z-index:7;max-height:62vh;overflow:auto;box-shadow:0 12px 30px rgba(31,36,71,.15)}
+.ri{all:unset;box-sizing:border-box;display:grid;grid-template-columns:6px minmax(0,1fr) auto;gap:14px;align-items:center;width:100%;padding:10px 12px 10px 8px;border-radius:8px;cursor:pointer}
+.ri:hover,.ri.act{background:var(--tint)}
+.ri .bar6{align-self:stretch;border-radius:3px;background:var(--c)}
+.ri b{font:600 17px/1.2 Rubik,sans-serif;display:block}
+.ri small{display:block;color:var(--mute);font-size:14px;line-height:1.35;margin-top:2px}
+.ri .go{color:#a3a7bd;font-size:18px}
+.empty{color:var(--mute);padding:14px 12px}
+/* badge */
+.lanyard{display:flex;flex-direction:column;align-items:center;width:100%;max-width:360px;margin-inline:auto}
+.strap{width:46px;height:90px;background:var(--blue);position:relative;overflow:hidden;display:flex;justify-content:center}
+.strap::before,.strap::after{content:"";position:absolute;top:0;bottom:0;width:0;border-left:1.5px dashed rgba(255,255,255,.45)}
+.strap::before{left:5px}.strap::after{right:5px}
+.strap span{writing-mode:vertical-rl;font:700 11px/46px Rubik,sans-serif;color:rgba(255,255,255,.75);letter-spacing:.08em;white-space:nowrap}
+.clip{width:62px;height:24px;border-radius:7px;background:linear-gradient(#eceef4,#a7acbd);border:1.5px solid #8b90a3;position:relative;z-index:2;margin-top:-2px}
+.ring{width:16px;height:22px;border:3px solid #8b90a3;border-radius:9px;margin-top:-5px;position:relative;z-index:2}
+.badge{width:100%;background:var(--paper);border:1.5px solid var(--ink);border-radius:18px;overflow:hidden;box-shadow:0 3px 0 var(--ink);margin-top:-12px;position:relative}
+.b-head{background:var(--c);color:var(--on);padding:32px 20px 58px;position:relative;overflow:hidden}
+.b-head .slot{position:absolute;left:50%;top:12px;width:56px;height:11px;margin-left:-28px;border-radius:6px;background:var(--paper);border:1.5px solid rgba(0,0,0,.18)}
+.b-head .hr{display:flex;justify-content:space-between;align-items:center;gap:10px;position:relative;z-index:1}
+.b-head img{height:38px}
+.b-head .dv{font-size:13px;font-weight:700;text-align:right;line-height:1.25}
+.b-head .ghost{position:absolute;right:-26px;bottom:-52px;font-size:150px;line-height:0;opacity:.16}
+.b-photo{width:100px;height:100px;border-radius:50%;margin:-50px auto 0;position:relative;display:grid;place-items:center;font:800 36px Rubik,sans-serif;color:var(--t);background:var(--s);border:5px solid var(--paper);box-shadow:0 0 0 2px var(--c)}
+.b-photo svg{font-size:40px}
+.b-body{text-align:center;padding:12px 20px 0}
+.b-name{font:800 clamp(28px,4vw,36px)/1.05 Rubik,sans-serif;letter-spacing:-.02em;overflow-wrap:anywhere}
+.b-role{display:inline-block;margin-top:10px;font:600 17px/1.25 Rubik,sans-serif;color:var(--t);background:var(--s);padding:7px 14px;border-radius:8px}
+.b-team{display:flex;justify-content:center;align-items:center;gap:6px;margin-top:10px;font-size:14px;font-weight:600;color:var(--mute)}
+.b-team svg{color:var(--t)}
+.b-cap{margin:16px 2px 0;font-size:15px;line-height:1.55;color:#3d4263}
+.b-cap::before{content:"\201C";display:block;font:800 44px/.55 Rubik,sans-serif;color:var(--c);margin:10px 0 6px}
+.b-stub{position:relative;margin-top:18px;border-top:2px dashed #c9ccdc;padding:12px 20px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.b-stub::before,.b-stub::after{content:"";position:absolute;top:-12px;width:22px;height:22px;border-radius:50%;background:var(--paper);border:1.5px solid var(--ink)}
+.b-stub::before{left:-12px}.b-stub::after{right:-12px}
+.b-stub .who{font-size:13px;color:var(--mute)}
+.b-stripe{display:grid;grid-template-columns:3fr 1fr 1fr;height:9px}
+.b-stripe i{display:block}
+.mark{display:inline-block;font:700 12px/1 Figtree,sans-serif;padding:5px 8px;border-radius:6px;background:var(--navy);color:#fff}
+.mark.you{background:var(--sun);color:var(--navy)}
+.demo .b-name,.demo .b-role{color:#aeb2c6}
+.demo .b-role{background:var(--tint)}
+@media(prefers-reduced-motion:no-preference){.swing{transform-origin:50% 0;animation:sw 1.4s ease-out 1}@keyframes sw{0%{transform:rotate(3deg)}45%{transform:rotate(-1.6deg)}75%{transform:rotate(.6deg)}100%{transform:rotate(0)}}}
+/* division list */
+.dteam{border-bottom:1px solid var(--line)}
+.dteam summary{list-style:none;display:grid;grid-template-columns:24px minmax(0,1fr) auto 18px;gap:12px;align-items:center;padding:14px 4px;cursor:pointer}
+.dteam summary::-webkit-details-marker{display:none}
+.dteam summary:hover{background:var(--tint)}
+.dteam summary>svg:first-child{font-size:21px;color:var(--t)}
+.dteam summary b{font:600 17px Rubik,sans-serif;display:block}
+.dteam summary small{display:block;color:var(--mute);font-size:14px}
+.dteam summary .ct{font-size:14px;color:var(--mute);white-space:nowrap}
+.dteam .chev{color:#a3a7bd;transition:transform .2s}
+.dteam[open] .chev{transform:rotate(90deg)}
+.dteam .inner{padding:0 0 12px 36px}
+.dteam .inner .prow:last-child{border-bottom:0}
+.colead{font-size:15px;color:var(--mute);margin:4px 0 6px}
+@media(max-width:640px){.dteam .inner{padding-left:0}}
+/* find screen */
+.find{min-height:100svh;display:flex;flex-direction:column}
+.logos{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:18px}
+.logos .op{height:clamp(46px,6vw,60px)}
+.logos .xy{height:clamp(22px,3vw,28px)}
+.fgrid{flex:1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:48px;align-items:start;padding-block:clamp(16px,5vh,56px) 48px}
+.find h1{font-size:clamp(38px,6vw,68px);font-weight:800;line-height:1;letter-spacing:-.03em;max-width:12ch}
+.find h1 em{font-style:normal;color:var(--blue)}
+.find .lede{font-size:18px;color:var(--mute);margin:16px 0 26px;max-width:42ch}
+.find label.l{display:block;font-weight:600;font-size:15px;margin-bottom:8px}
+.find .sbox input{height:64px;font-size:19px;border:2px solid var(--ink);border-radius:14px;box-shadow:0 3px 0 var(--ink)}
+.find .list{margin-top:12px;border:1.5px solid var(--line);border-radius:14px;padding:4px}
+.find .more{margin-top:22px}
+/* top bar */
+.bar{position:sticky;top:0;z-index:6;background:rgba(255,255,255,.96);backdrop-filter:blur(6px);border-bottom:1.5px solid var(--line)}
+.bar .in{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px;align-items:center;padding-block:10px}
+.bar .op{height:44px;cursor:pointer}
+.bar .sbox input{height:46px}
+/* role screen */
+.page{padding-block:28px 72px}
+.viewing{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;border:1.5px solid var(--ink);background:#fffbea;border-radius:12px;padding:8px 8px 8px 16px;margin-bottom:24px}
+.viewing div{display:flex;gap:8px;flex-wrap:wrap}
+.rgrid{display:grid;grid-template-columns:minmax(0,380px) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
+.rleft{position:sticky;top:90px}
+.switch{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:14px}
+.switch button{border:1.5px solid var(--line);background:var(--paper);min-height:40px;padding:0 12px;border-radius:10px;font-weight:600;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.switch button svg{color:var(--c)}
+.switch button[aria-pressed=true]{border-color:var(--ink);background:var(--ink);color:#fff}
+.switch button[aria-pressed=true] svg{color:#fff}
+.bacts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.bacts .wide{grid-column:1/-1}
+.notyou{text-align:center;margin-top:6px}
+.sec{margin-bottom:40px}
+.sh{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 16px;border-top:3px solid var(--ink);padding-top:12px;margin-bottom:6px}
+.sh h2{font-size:26px;font-weight:700}
+.sh .meta{font-size:15px;color:var(--mute);display:flex;align-items:center;gap:8px}
+.sh .meta svg{color:var(--c,var(--blue))}
+.prow{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:14px;align-items:center;padding:12px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.prow:hover{background:var(--tint)}
+.prow b{font:600 17px/1.25 Rubik,sans-serif}
+.prow .rl{display:block;font-size:14px;color:var(--ink);line-height:1.35;margin-top:2px}
+.prow .dp{display:block;font-size:13px;color:var(--mute)}
+.prow .mark{margin-left:8px;vertical-align:3px}
+.prow.big{padding:16px 4px}
+.prow.big b{font-size:21px}
+.prow.big .av{width:54px;height:54px;font-size:19px}
+.av{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font:700 15px Rubik,sans-serif;background:var(--s,#e9edf8);color:var(--t,var(--navy));flex:none}
+.av.open{background:var(--paper);border:2px dashed #c3c7d8;color:var(--mute)}
+.subh{font:600 17px Rubik,sans-serif;margin:22px 0 4px;display:flex;align-items:center;gap:8px}
+.subh svg{color:var(--c)}
+.none{color:var(--mute);padding:12px 0}
+/* directory */
+.dh h1{font-size:clamp(34px,5vw,54px);font-weight:800;line-height:1;letter-spacing:-.03em}
+.dh p{margin:10px 0 0;color:var(--mute);font-size:17px}
+.utabs{display:flex;gap:4px;border-bottom:1.5px solid var(--line);margin:26px 0 8px;overflow-x:auto}
+.utabs button{all:unset;cursor:pointer;padding:12px 14px;font-weight:600;color:var(--mute);border-bottom:3px solid transparent;margin-bottom:-1.5px;display:inline-flex;gap:8px;align-items:center;white-space:nowrap}
+.utabs button[aria-selected=true]{color:var(--ink);border-color:var(--ink)}
+.stage{display:grid;grid-template-columns:200px minmax(0,1fr);gap:24px;padding:22px 0;border-bottom:1.5px solid var(--line)}
+.stage .sl{display:flex;gap:10px;align-items:baseline}
+.stage .sl i,.stage .sl .dot{width:12px;height:12px;border-radius:3px;background:var(--c);flex:none;display:inline-block;transform:translateY(1px)}
+.stage .sl h2{font-size:22px;font-weight:700}
+.stage .sl small{display:block;color:var(--mute);font-size:14px}
+.trow{all:unset;box-sizing:border-box;width:100%;display:grid;grid-template-columns:28px minmax(0,1.1fr) minmax(0,1fr) auto 18px;gap:14px;align-items:center;padding:12px 4px;border-bottom:1px solid var(--line);cursor:pointer}
+.trow:last-child{border-bottom:0}
+.trow:hover{background:var(--tint)}
+.trow>svg:first-child,.trow>i:first-child{font-size:22px;color:var(--t)}
+.trow b{font:600 17px Rubik,sans-serif}
+.trow .lead{color:var(--mute);font-size:15px}
+.trow .ct{font-size:14px;color:var(--mute);white-space:nowrap}
+.trow .go{color:#a3a7bd}
+.trow.sub{padding-left:26px}
+.headrow{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:16px;border:1.5px solid var(--ink);border-radius:14px;background:#fffbea;margin-top:20px;cursor:pointer}
+.headrow .av{background:var(--sun);color:var(--navy)}
+.letter{font:800 24px Rubik,sans-serif;color:var(--blue);margin:26px 0 2px}
+.cols2{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,420px),1fr));gap:0 40px}
+.dgrp{margin-top:26px}
+/* sheet */
+.scrim{position:fixed;inset:0;background:rgba(31,36,71,.4);opacity:0;pointer-events:none;transition:opacity .2s;z-index:8}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;top:0;right:0;bottom:0;width:min(520px,100%);background:var(--paper);z-index:9;transform:translateX(102%);transition:transform .25s;display:flex;flex-direction:column;border-left:1.5px solid var(--ink);visibility:hidden}
+.sheet.on{transform:none;visibility:visible}
+.sbar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 16px;border-bottom:1.5px solid var(--line)}
+.sbody{overflow:auto;padding:22px 20px 48px}
+.stitle{border-top:6px solid var(--c);padding-top:14px;margin-bottom:18px}
+.stitle .k{font-size:14px;font-weight:600;color:var(--t);display:flex;align-items:center;gap:8px}
+.stitle h2{font-size:30px;font-weight:800;line-height:1.05;margin-top:6px}
+.stitle p{margin:8px 0 0;color:var(--mute)}
+.form{display:grid;gap:14px}
+.form label{font-size:14px;font-weight:600;display:grid;gap:6px}
+.form input,.form textarea{font:17px Figtree,sans-serif;padding:10px 12px;min-height:48px;border:1.5px solid #c9ccdc;border-radius:10px;background:var(--paper);color:var(--ink)}
+.form input:focus,.form textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px #fde89a}
+.form textarea{min-height:300px;resize:vertical;line-height:1.55}
+.form .fr{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;align-items:center}
+.hint{font-size:13px;color:var(--mute);font-weight:400}
+.err{color:#c22e3e;font-size:14px;margin-right:auto}
+.manual{font-size:17px;line-height:1.65}
+.manual p{margin:0 0 14px}
+.manual ul{margin:0 0 14px;padding-left:22px}
+.manual li{margin-bottom:6px}
+.soon{border:1.5px dashed #c3c7d8;border-radius:14px;padding:28px 20px;text-align:center;color:var(--mute)}
+.soon b{display:block;color:var(--ink);font:600 18px Rubik,sans-serif;margin-bottom:4px}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:12px 18px;border-radius:12px;font-size:15px;z-index:20;max-width:calc(100% - 32px)}
+@media(max-width:900px){.rgrid{grid-template-columns:minmax(0,1fr)}.rleft{position:static}.fgrid{grid-template-columns:minmax(0,1fr)}.fgrid{gap:36px}.fgrid .preview{width:min(320px,100%);margin-inline:auto}.stage{grid-template-columns:minmax(0,1fr);gap:8px}}
+@media(max-width:640px){
+ .bar .in{grid-template-columns:minmax(0,1fr) auto;gap:10px}.bar .sbox{grid-column:1/-1;grid-row:2}.bar .op{height:38px}.bar .btn span{display:none}.bar .btn{padding:0 12px}
+ .prow{grid-template-columns:auto minmax(0,1fr) auto;gap:12px}.prow .ico{display:none}.prow .call .num{display:none}.prow .call{width:42px;padding:0;justify-content:center;font-size:17px}
+ .trow{grid-template-columns:24px minmax(0,1fr) auto 14px;gap:12px}.trow .lead{grid-column:2;grid-row:2;font-size:14px;margin-top:-8px}
+ .sh h2{font-size:23px}
+ .sheet{top:auto;height:92svh;width:100%;border-left:0;border-top:1.5px solid var(--ink);border-radius:18px 18px 0 0;transform:translateY(102%)}
+ .strap{height:56px}
+ .find h1{font-size:clamp(36px,11vw,48px)}
+}
+@media(prefers-reduced-motion:reduce){.sheet,.scrim{transition:none}}
+.mark.lv0{background:var(--sun);color:var(--navy)}
+.mark.lv1{background:var(--navy);color:#fff}
+.mark.lv2{background:#d8f3ef;color:#0b5f57}
+.b-roles{margin-top:14px;text-align:left;border:1.5px solid var(--line);border-radius:12px;padding:6px}
+.b-roles .lbl{display:block;padding:4px 8px 6px;font-size:12px}
+.b-r{all:unset;box-sizing:border-box;display:grid;grid-template-columns:10px minmax(0,1fr);gap:10px;align-items:center;width:100%;padding:8px;border-radius:8px;cursor:pointer}
+.b-r:hover{background:var(--tint)}
+.b-r.on{background:var(--s)}
+.b-r .dot{width:10px;height:10px;border-radius:3px;background:var(--c)}
+.b-r b{font:600 15px/1.25 Rubik,sans-serif;display:block}
+.b-r small{display:block;font-size:13px;color:var(--mute)}
+.b-r:focus-visible{outline:3px solid var(--sun)}
+.rtabs{display:flex;gap:8px;overflow-x:auto;margin-bottom:22px;padding-bottom:2px}
+.rtabs button{all:unset;box-sizing:border-box;cursor:pointer;display:flex;gap:10px;align-items:center;padding:10px 14px;border:1.5px solid var(--line);border-radius:12px;min-width:180px;flex:none}
+.rtabs button svg{font-size:20px;color:var(--c)}
+.rtabs button b{display:block;font:600 15px/1.2 Rubik,sans-serif}
+.rtabs button small{display:block;font-size:13px;color:var(--mute)}
+.rtabs button[aria-selected=true]{border-color:var(--ink);background:var(--ink);color:#fff}
+.rtabs button[aria-selected=true] small,.rtabs button[aria-selected=true] svg{color:#dfe2f0}
+.rtabs button:focus-visible{outline:3px solid var(--sun)}
+.tree .prow{padding-left:calc(4px + var(--d,0) * 28px);position:relative}
+.tree .prow[style*="--d:1"]::before,.tree .prow[style*="--d:2"]::before,.tree .prow[style*="--d:3"]::before{content:"";position:absolute;left:calc(var(--d) * 28px - 14px);top:-1px;height:50%;width:10px;border-left:2px solid #c9ccdc;border-bottom:2px solid #c9ccdc;border-bottom-left-radius:6px}
+.prow.ghost{cursor:default}
+.heads{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr));gap:12px;margin-top:20px}
+.heads .headrow{margin-top:0}
+@media(max-width:640px){.tree .prow{padding-left:calc(4px + var(--d,0) * 16px)}.tree .prow[style*="--d:1"]::before,.tree .prow[style*="--d:2"]::before,.tree .prow[style*="--d:3"]::before{left:calc(var(--d) * 16px - 10px);width:6px}.rtabs button{min-width:150px}}
+
+.b-brand{display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 18px 10px;border-top:1px solid var(--line)}
+.b-brand span{font-size:12px;color:var(--mute)}
+.b-brand img{height:20px}
+.bacts{grid-template-columns:1fr 1fr}
+.kdet summary{list-style:none;cursor:pointer}
+.kdet summary::-webkit-details-marker{display:none}
+.kdet summary .chev{margin-left:auto;transition:transform .2s}
+.kdet[open] summary .chev{transform:rotate(180deg)}
+.kdet .kbody{margin-top:8px}
+.foot{display:flex;align-items:center;gap:12px;justify-content:center;padding-block:28px 40px;color:var(--mute);font-size:14px;border-top:1.5px solid var(--line)}
+.foot img{height:24px}
+.web [data-editp],.web [data-medit]{display:none!important}
+.web .bacts{grid-template-columns:1fr}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="scrim" id="scrim"></div>
+<aside class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Details">
+  <div class="sbar"><button class="btn" id="sback"><i data-lucide="arrow-left"></i>Back</button><button class="btn" id="sclose"><i data-lucide="x"></i>Close</button></div>
+  <div class="sbody" id="sbody"></div>
+</aside>
+<div class="toast" id="toast" hidden></div>
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+<script>
+{
+/* ---------- the sheet, as filled in by the team ---------- */
+const ROWS=[["Havas KV", "Event Head", "Oppam – All teams", null, "Event Head", null, null, "CEO Office", "All divisions"], ["Roshan K", "Event Head", "Oppam – All teams", null, "Event Head", null, null, "Marketing", "All divisions"], ["Faiez Ahammed", "Registration In-Charge (Logistics & Staff Management)", "Registration", null, "Section In-charge", "Event Head", null, "Product", "Arrival Section"], ["Vachan Girish", "Registration Desk Supervisor", "Registration", null, "Team Lead", "Faiez Ahammed", null, "Product", "Arrival Section"], ["Vishnu B V", "Mobility Coordinator", "Seating", "Help Desk – Entrance, Help Desk – Venue", "Section In-charge", null, null, "Sales", "Family Meet Area"], ["Mubashira CP", "Registration Desk Executive", "Registration", null, "Member", "Vachan Girish", null, "Sales", "Arrival Section"], ["Fathima jumana", "Registration Desk Executive", "Registration", null, "Member", "Vachan Girish", null, "Sales", "Arrival Section"], ["Risbana", "Registration Desk Executive", "Registration", null, "Member", "Vachan Girish", null, "Sales", "Arrival Section"], ["Arzina Khadeeja P A", "Registration Desk Executive", "Registration", null, "Member", "Vachan Girish", null, "Sales", "Arrival Section"], ["Rashida N P", "Registration Desk Executive", "Registration", null, "Member", "Vachan Girish", null, "Sales", "Arrival Section"], ["Mubashira Thasni", "Registration Desk Executive", "Registration", null, "Member", "Vachan Girish", null, "Sales", "Arrival Section"], ["Fathima Amani", "Registration Desk Executive", "Registration", null, "Member", "Vachan Girish", null, "Sales", "Arrival Section"], ["Fahmida N", "Entrance Help Desk Lead", "Help Desk – Entrance", null, "Team Lead", "Faiez Ahammed", null, "Sales", "Arrival Section"], ["Jifi Jose", "Entrance Help Desk Lead", "Help Desk – Entrance", null, "Team Lead", "Faiez Ahammed", null, "Experience", "Arrival Section"], ["Raheena", "Help Desk Executive", "Help Desk – Entrance", null, "Member", "Fahmida & Jifi Jose", null, "Sales", "Arrival Section"], ["Rasmiya Asrath illikkal", "Help Desk Executive", "Help Desk – Entrance", null, "Member", "Fahmida & Jifi Jose", null, "Sales", "Arrival Section"], ["Ameena", "Help Desk Executive", "Help Desk – Entrance", null, "Member", "Fahmida & Jifi Jose", null, "Sales", "Arrival Section"], ["Marishka fathima", "Help Desk Executive", "Help Desk – Entrance", null, "Member", "Fahmida & Jifi Jose", null, "Sales", "Arrival Section"], ["Sales 5", "Help Desk Executive", "Help Desk – Entrance", null, "Member", "Fahmida & Jifi Jose", null, "Sales", "Arrival Section"], ["Sales 6", "Help Desk Executive", "Help Desk – Entrance", null, "Member", "Fahmida & Jifi Jose", null, "Sales", "Arrival Section"], ["Sales 7", "Help Desk Executive", "Help Desk – Entrance", null, "Member", "Fahmida & Jifi Jose", null, "Sales", "Arrival Section"], ["Savin K", "Venue Help Desk Lead", "Help Desk – Venue", null, "Section In-charge", null, null, "HR", "Family Meet Area"], ["Fameena PM", "Guide Team Lead – Group 1", "Help Desk – Venue", null, "Team Lead", "Savin K", null, "Experience", "Family Meet Area"], ["Sabna PK", "Guide Team Lead – Group 2", "Help Desk – Venue", null, "Team Lead", "Savin K", null, "Experience", "Family Meet Area"], ["Fahmidha Sherin", "Venue Guide", "Help Desk – Venue", null, "Member", "Fameena PM", null, "Experience", "Family Meet Area"], ["Sreedivya MK", "Venue Guide", "Help Desk – Venue", null, "Member", "Fameena PM", null, "Experience", "Family Meet Area"], ["Ziyana", "Venue Guide", "Help Desk – Venue", null, "Member", "Fameena PM", null, "Experience", "Family Meet Area"], ["Fildha NV", "Venue Guide", "Help Desk – Venue", null, "Member", "Fameena PM", null, "Experience", "Family Meet Area"], ["Asna V", "Venue Guide", "Help Desk – Venue", null, "Member", "Sabna PK", null, "Experience", "Family Meet Area"], ["Jahana", "Venue Guide", "Help Desk – Venue", null, "Member", "Sabna PK", null, "Experience", "Family Meet Area"], ["Jaseera KK", "Venue Guide", "Help Desk – Venue", null, "Member", "Sabna PK", null, "Experience", "Family Meet Area"], ["Shifa Rubi", "Venue Guide", "Help Desk – Venue", null, "Member", "Sabna PK", null, "Experience", "Family Meet Area"], ["Ashmil", "Stage Flow & Console Manager", "Stage", null, "Section In-charge", "Event Head", null, "Marketing", "Family Meet Area"], ["Sahad", "Stage Production Lead", "Stage", null, "Member", "Ashmil", null, "Media", "Family Meet Area"], ["Primrose", "Guest Host", "Stage", null, "Section In-charge", "Ashmil", null, "Management", "Family Meet Area"], ["Sharbi", "Guest Host", "Stage", null, "Member", "Primrose", null, "HR", "Family Meet Area"], ["Adnan E P", "Guest Hospitality Executive", "Stage", null, "Member", "Primrose", null, "Operations", "Family Meet Area"], ["Arunima V P", "Guest Hospitality Executive", "Stage", null, "Member", "Primrose", null, "HR", "Family Meet Area"], ["Sabiq", "Guest Hospitality Executive", "Stage", null, "Member", "Primrose", null, "Finance", "Family Meet Area"], ["Cyriac Thomas", "Guest Hospitality Executive", "Stage", null, "Member", "Primrose", null, "Sales", "Family Meet Area"], ["Vishnu B V", "Mobility Lead (Crowd Movement)", "Seating", null, "Member", "Hannah", null, "Sales", "Family Meet Area"], ["Hannah Beevi", "Seating Lead", "Seating", null, "Section In-charge", "Event Head", null, "Experience", "Family Meet Area"], ["Shafaf", "Seating Block Lead", "Seating", null, "Member", "Hannah", null, "Sales", "Family Meet Area"], ["Shada", "Seating Block Lead", "Seating", null, "Member", "Hannah", null, "Sales", "Family Meet Area"], ["Fidha", "Seating Block Lead", "Seating", null, "Member", "Hannah", null, "Sales", "Family Meet Area"], ["Reshma C", "Seating Block Lead", "Seating", null, "Member", "Hannah", null, "Sales", "Family Meet Area"], ["Sonia C S", "Seating Host", "Seating", null, "Member", "Shada", null, "Experience", "Family Meet Area"], ["Praveena S K", "Seating Host", "Seating", null, "Member", "Shada", null, "Experience", "Family Meet Area"], ["Ranjitha Krishnan R", "Seating Host", "Seating", null, "Member", "Shada", null, "Experience", "Family Meet Area"], ["Aysha Lena", "Seating Host", "Seating", null, "Member", "Shada", null, "Experience", "Family Meet Area"], ["Anjana K", "Seating Host", "Seating", null, "Member", "Shada", null, "Experience", "Family Meet Area"], ["Seetha Sasi", "Seating Host", "Seating", null, "Member", "Shada", null, "Experience", "Family Meet Area"], ["Vardha", "Seating Host", "Seating", null, "Member", "Shafaf", null, "Experience", "Family Meet Area"], ["Fathimath Riza", "Seating Host", "Seating", null, "Member", "Shafaf", null, "Experience", "Family Meet Area"], ["Nasreen Nazar", "Seating Host", "Seating", null, "Member", "Shafaf", null, "Experience", "Family Meet Area"], ["Hasna Riyas", "Seating Host", "Seating", null, "Member", "Shafaf", null, "Experience", "Family Meet Area"], ["Dhrisya Sudevan", "Seating Host", "Seating", null, "Member", "Shafaf", null, "Experience", "Family Meet Area"], ["Febina", "Seating Host", "Seating", null, "Member", "Shafaf", null, "Experience", "Family Meet Area"], ["Rifna Thasni", "Seating Host", "Seating", null, "Member", "Fidha", null, "Experience", "Family Meet Area"], ["Anshida A", "Seating Host", "Seating", null, "Member", "Fidha", null, "Experience", "Family Meet Area"], ["Mehjabin Sherin", "Seating Host", "Seating", null, "Member", "Fidha", null, "Experience", "Family Meet Area"], ["Sruthy P", "Seating Host", "Seating", null, "Member", "Fidha", null, "Experience", "Family Meet Area"], ["Wafa Sidhique", "Seating Host", "Seating", null, "Member", "Fidha", null, "Experience", "Family Meet Area"], ["Sakiya nasreen. A", "Seating Host", "Seating", null, "Member", "Fidha", null, "Experience", "Family Meet Area"], ["Shinsiya", "Seating Host", "Seating", null, "Member", "Reshma", null, "Experience", "Family Meet Area"], ["Ansha KP", "Seating Host", "Seating", null, "Member", "Reshma", null, "Experience", "Family Meet Area"], ["Shamna P", "Seating Host", "Seating", null, "Member", "Reshma", null, "Experience", "Family Meet Area"], ["Fathima Dilsha KK", "Seating Host", "Seating", null, "Member", "Reshma", null, "Experience", "Family Meet Area"], ["Hamna K", "Seating Host", "Seating", null, "Member", "Reshma", null, "Experience", "Family Meet Area"], ["Fidha Muhammed", "Seating Host", "Seating", null, "Member", "Reshma", null, "Experience", "Family Meet Area"], ["Najath", "Gifts & Awards Lead", "Gifts & Awards", null, "Section In-charge", "Event Head", null, "Product", "Family Meet Area"], ["Manhal", "Guest “Token of Love” Coordinator", "Gifts & Awards", null, "Member", "Najath", null, "Product", "Family Meet Area"], ["Mehshan", "Student Awards Coordinator", "Gifts & Awards", null, "Member", "Najath", null, "Product", "Family Meet Area"], ["Fasil KP", "Media Lead", "Media", null, "Section In-charge", "Event Head", null, "Media", "Family Meet Area"], ["Abdulla VC", "PR & Testimonials Lead", "Media", null, "Section In-charge", "Event Head", null, "Media", "Family Meet Area"], ["Ankeeth Kumar", "Influencer Relations Lead", "Media", null, "Member", "Fasil", null, "Marketing", "Family Meet Area"], ["Adhil Ahmed", "Social Media Manager", "Media", null, "Member", "Fasil", null, "CEO Office", "Family Meet Area"], ["Nizam", "Media Crew", "Media", null, "Member", "Fasil", null, "Media", "Family Meet Area"], ["Athik", "Media Crew", "Media", null, "Member", "Fasil", null, "Media", "Family Meet Area"], ["Anzil", "Media Crew", "Media", null, "Member", "Fasil", null, "Media", "Family Meet Area"], ["Afeef", "Media Crew", "Media", null, "Member", "Fasil", null, "Media", "Family Meet Area"], ["Rajinas", "Media Crew", "Media", null, "Member", "Fasil", null, "Media", "Family Meet Area"], ["Anshid", "Media Crew", "Media", null, "Member", "Fasil", null, "Media", "Family Meet Area"], ["Neethu Babu", "Lounge Lead", "Participant Lounge", null, "Section In-charge", "Event Head", null, "Experience", "Family Meet Area"], ["Zoya", "Photo Lounge Lead", "Participant Lounge", null, "Team Lead", "Neethu", null, "Experience", "Family Meet Area"], ["Rose Mary Mathew", "Mentor Lounge Lead", "Participant Lounge", null, "Team Lead", "Neethu", null, "Experience", "Family Meet Area"], ["Zesbeen VK", "Testimonials Lead", "Participant Lounge", null, "Team Lead", "Abdulla VC", null, "Experience", "Family Meet Area"], ["Nithya Babu", "Testimonials Coordinator", "Participant Lounge", null, "Member", "Zesbeen Vk", null, "Experience", "Family Meet Area"], ["Shana Shrin", "Testimonials Coordinator", "Participant Lounge", null, "Member", "Zesbeen Vk", null, "Experience", "Family Meet Area"], ["Shaheeda", "Testimonials Coordinator", "Participant Lounge", null, "Member", "Zesbeen Vk", null, "Experience", "Family Meet Area"], ["Faiza Firos", "Lounge Refreshments Lead", "Participant Lounge", null, "Team Lead", "Neethu", null, "Experience", "Family Meet Area"], ["Mentor 1", "Lounge Host", "Participant Lounge", null, "Member", "Rose Mary Mathew", null, "Experience", "Family Meet Area"], ["Mentor 2", "Lounge Host", "Participant Lounge", null, "Member", "Rose Mary Mathew", null, "Experience", "Family Meet Area"], ["Mentor 3", "Lounge Host", "Participant Lounge", null, "Member", "Rose Mary Mathew", null, "Experience", "Family Meet Area"], ["Mentor 4", "Lounge Host", "Participant Lounge", null, "Member", "Rose Mary Mathew", null, "Experience", "Family Meet Area"], ["Mentor 5", "Lounge Host", "Participant Lounge", null, "Member", "Rose Mary Mathew", null, "Experience", "Family Meet Area"], ["Yaseen", "Food Lead", "Food & Refreshments", null, "Section In-charge", "Event Head", null, "Sales", "Food & Refreshment"], ["Sabiq", "Refreshments Lead (Participants & Guests)", "Food & Refreshments", null, "Member", "Yaseen", null, "Finance", "Food & Refreshment"], ["Navas", "VIP Management & Food", "Food & Refreshments", null, "Member", "Yaseen", null, "Product", "Food & Refreshment"], ["Adhil Hadi", "Food Counter Crowd Control", "Food & Refreshments", null, "Member", "Yaseen", null, "COO Office", "Food & Refreshment"], ["Nabeel Nazer", "Prayer Hall Coordinator", "Prayer Hall", "Also Tech Team", "Member", null, null, "Tech", "Family Meet Area"], ["Fidha PK", "Prayer Hall Coordinator", "Prayer Hall", null, "Member", null, null, "Marketing", "Family Meet Area"], ["Ziyan", "Carnival Area Head", "Carnival Area – Overall", null, "Section In-charge", "Event Head", null, "CEO Office", "Carnival Area"], ["Yusuf Islam", "Expo Zone In-Charge", "Expo Zone", "Covers RC Arena", "Team Lead", "Ziyan", null, "Marketing", "Carnival Area"], ["Asif", "Expo Coordinator", "Expo Zone", "Covers RC Arena", "Member", "Yusuf", null, "COO Office", "Carnival Area"], ["Sheheem Ashraf", "Lifelab In-Charge", "Lifelab", null, "Section In-charge", "Ziyan", null, "Experience", "Carnival Area"], ["Afeeda", "Lifelab Executive", "Lifelab", null, "Member", "Sheheem Ashraf", null, "New Initiatives", "Carnival Area"], ["Ramseena PM", "Lifelab Executive", "Lifelab", null, "Member", "Sheheem Ashraf", null, "Experience", "Carnival Area"], ["Ahalya VK", "Lifelab Executive", "Lifelab", null, "Member", "Sheheem Ashraf", null, "Experience", "Carnival Area"], ["Afnan", "Career Stall In-Charge", "Career Stall", null, "Section In-charge", "Event Head", null, "New Initiatives", "Carnival Area"], ["Sales 1", "Career Stall Executive", "Career Stall", null, "Member", "Afnan", null, null, "Carnival Area"], ["Sales 2", "Career Stall Executive", "Career Stall", null, "Member", "Afnan", null, null, "Carnival Area"], ["Nada Jabeen", "Maths Stall Executive", "Maths Stall", null, "Section In-charge", "Ziyan", null, "Product", "Carnival Area"], ["Salesperson 1", "Sales Executive", "Sales", null, "Member", null, null, "Sales", "Carnival Area"], ["Salesperson 2", "Sales Executive", "Sales", null, "Member", null, null, "Sales", "Carnival Area"], ["Salesperson 3", "Sales Executive", "Sales", null, "Member", null, null, "Sales", "Carnival Area"], ["Ansha Ashraf", "Aesthetic Zone In-Charge", "Aesthetic Zone", null, "Section In-charge", "Ziyan", null, "Product", "Carnival Area"], ["Almas AA", "Games Head (XandY Games & Decathlon Games)", "Carnival Area – Overall", null, "Section In-charge", "Ziyan", null, "COO Office", "Carnival Area"], ["Afther", "XandY Games In-Charge", "XandY Games", null, "Section In-charge", "Almas", null, "Product", "Carnival Area"], ["Navya", "Games Coordinator", "XandY Games", null, "Member", "Afther", null, "HR", "Carnival Area"], ["Aswathi PK", "Games Coordinator", "XandY Games", null, "Member", "Afther", null, "Finance", "Carnival Area"], ["Aswani KP", "Games Coordinator", "XandY Games", null, "Member", "Afther", null, "Product", "Carnival Area"], ["Ruvitha", "Games Coordinator", "XandY Games", null, "Member", "Afther", null, "Experience", "Carnival Area"], ["Shabeeba", "Games Coordinator", "XandY Games", null, "Member", "Afther", null, "Experience", "Carnival Area"], ["Adhil Hadi", "Decathlon Game Head", "Decathlon Games", null, "Team Lead", "Almas", null, "COO Office", "Carnival Area"], ["HR Intern 1", "Games Assistant", "Decathlon Games", null, "Member", "Adhil Hadi", null, "HR", "Carnival Area"], ["HR Intern 2", "Games Assistant", "Decathlon Games", null, "Member", "Adhil Hadi", null, "HR", "Carnival Area"], ["Adhil Hadi", "Sponsor Relations Lead", "Sponsors", null, "Section In-charge", "Ziyan", null, "COO Office", "Sponsors & Externals"], ["Niyas", "Crisis Team Head (Overall)", "Crisis Team", null, "Section In-charge", "Event Head", null, "Product", "Others"], ["Irshad", "Crisis Response – Carnival Area", "Crisis Team", null, "Member", "Niyas", null, "Product", "Others"], ["Sahad", "Medical & Emergency Response", "Crisis Team", null, "Member", "Niyas", null, "Media", "Others"], ["Ajmal KA", "Tech Control Room In-Charge", "Tech Control Room", null, "Section In-charge", "Ziyan", null, "Tech", "Others"], ["Nabeel", "Tech Support", "Tech Control Room", null, "Member", "Ajmal Techy", null, "Tech", "Others"], ["Sooraj", "Tech Crisis Response", "Tech Control Room", null, "Member", "Ajmal Techy", null, "Tech", "Others"]];
+const CAP={
+'Registration In-Charge (Logistics & Staff Management)':'Hand you a hundred moving parts and you make it look like a calm Sunday. We knew the very first impression of Oppam had to be in your hands.',
+'Registration Desk Supervisor':'You have that rare gift of keeping things sharp and still making everyone feel at ease. Honestly, the desk is lucky to have you.',
+'Mobility Coordinator':'You read a crowd the way others read a map. With you around, nobody ever feels lost, and that is pure talent.',
+'Registration Desk Executive':'That smile of yours is the first thing every family will remember. We could not have picked a warmer welcome if we tried.',
+'Entrance Help Desk Lead':'People trust you the moment you speak, and your team feels it too. The entrance needed someone exactly like you.',
+'Help Desk Executive':'You make every question feel like a good question. That kind of patience and kindness is a superpower, and you have it.',
+'Venue Help Desk Lead':'You know this venue like the back of your hand and lead people like a natural. Every family is in the best possible hands.',
+'Guide Team Lead':'Your group follows you because you make leading look effortless. We picked you because the best guides need the best lead.',
+'Venue Guide':'You could make a maze feel like a walk in the park. Families will leave saying the nicest person showed them around.',
+'Stage Flow & Console Manager':'Every cue lands perfectly because you are behind it. The whole show breathes to your rhythm, and you make it look easy.',
+'Stage Production Lead':'You have an eye for magic that most people only dream of. The moments everyone remembers from that stage will be yours.',
+'Guest Host':'You light up a room the second you walk in. Our guests are about to feel like royalty, all because of you.',
+'Guest Hospitality Executive':'Grace, warmth and that thoughtful touch: you have all three. Guests will go home wondering how we found someone so lovely.',
+'Seating Lead':'You bring order with a smile and make it feel like care. A hall full of happy, settled families is your signature.',
+'Mobility Lead (Crowd Movement)':'You keep hundreds of people moving smoothly without anyone even noticing. That is quiet brilliance, and it is all you.',
+'Seating Block Lead':'Your block is in the best hands in the hall. People feel looked after the moment you are near them.',
+'Seating Host':'You have a way of making people feel they were expected and welcome. That short walk to their seat becomes a happy memory.',
+'Gifts & Awards Lead':'You have the biggest heart for recognising others, which is exactly why this role is yours. Every thank-you today carries your warmth.',
+'Guest “Token of Love” Coordinator':'Who better to hand over our love than the most thoughtful person on the team? Every guest leaves with a little piece of your kindness.',
+'Student Awards Coordinator':'You are about to make a room full of students feel like stars. A proud moment like that deserves someone as caring as you.',
+'Media Lead':'You see beauty where others see a busy day. Years from now, people will remember Oppam exactly the way you captured it.',
+'PR & Testimonials Lead':'People open up to you naturally, and their best stories come out. That is a gift, and Oppam\'s story is lucky to have it.',
+'Influencer Relations Lead':'You connect with people effortlessly, and they love you for it. Oppam is about to travel far, thanks to you.',
+'Social Media Manager':'You have a knack for making everyone online wish they were here. The internet is about to fall in love with Oppam.',
+'Media Crew':'You catch the moments others miss, and you make everyone look their best. Those photos will be framed in living rooms for years.',
+'Lounge Lead':'You make any space feel like home within minutes. The lounge will be everyone\'s favourite corner, because it is yours.',
+'Photo Lounge Lead':'You know just how to bring out a real smile. Every family is going home with a picture they will treasure, thanks to you.',
+'Mentor Lounge Lead':'You look after the people who look after everyone else, and you do it so naturally. That makes you the heart of the team.',
+'Lounge Refreshments Lead':'You always notice what people need before they ask. That kind of thoughtfulness is rare, and today it is yours to share.',
+'Testimonials Lead':'People feel heard when they talk to you, and it shows. The kindest words about Oppam will come from conversations with you.',
+'Lounge Host':'You make strangers feel like old friends in minutes. The lounge will feel like a living room because you are in it.',
+'Food Lead':'You care about every plate as if it were for your own family. That is why the best meal of the day is in your hands.',
+'Refreshments Lead (Participants & Guests)':'You keep everyone energised and smiling, and somehow you never miss a thing. The whole hall runs a little happier because of you.',
+'VIP Management & Food':'You have impeccable taste and an eye for every little detail. Our most special guests could not be in better hands.',
+'Food Counter Crowd Control':'You keep things fair, friendly and flowing like a pro. Only someone this calm and kind could make a food line feel pleasant.',
+'Prayer Hall Coordinator':'You bring a calm and respect to everything you do. People will feel your care the moment they walk in.',
+'Feeding Room Coordinator':'Your thoughtfulness is the kind people never forget. Parents will feel so cared for, and they will have you to thank.',
+'Expo Zone In-Charge':'You turn curiosity into wonder, and you make it look effortless. The Expo Zone is going to shine because it reflects you.',
+'Expo Coordinator':'You have the sharpest eye for detail on the team. Every corner of the expo will be just right, because you made it so.',
+'Lifelab In-Charge':'You make learning feel like an adventure, and students light up around you. Lifelab could not have a better captain.',
+'Lifelab Coordinator':'You keep everything running so smoothly that it feels like magic. Students get to explore freely because you have it all covered.',
+'Lifelab Mentor':'You have that special way of making a student say "Oh, I get it now!" That moment is a gift, and you give it so well.',
+'Career Stall In-Charge':'People trust your advice, and for good reason. A single chat with you could change a student\'s future.',
+'Career Stall Executive':'You make big decisions feel simple and exciting. Families will walk away inspired, and you will be the reason.',
+'Maths Stall In-Charge':'Only you could make people fall in love with maths in one visit. Your stall is about to change some minds, and you will enjoy every bit.',
+'Sales Executive':'People feel comfortable with you instantly, and that is a rare gift. Families will remember the friendly face who made it all clear.',
+'Aesthetic Zone In-Charge':'You have the best eye on the team, no question. Every photo taken at Oppam will quietly show off your taste.',
+'RC Arena In-Charge':'You bring the thrill and keep it safe, which takes real skill. The kids will call it the best part of the day, and they will be right.',
+'Arena Manager':'You keep the action fast, fun and smooth all day long. Every cheer from the arena is a little bit for you.',
+'Games Head (XandY Games & Physical Games)':'Every bit of laughter across the venue leads back to you. You were the obvious choice to bring the fun to Oppam.',
+'XandY Games In-Charge':'You make learning feel like the best game in the room. No one could bring XandY\'s spirit to life the way you do.',
+'Games Coordinator':'You have boundless energy and a way of making everyone want to play. The games zone is lucky to have you.',
+'IT Support Mentor':'When things work like a dream, it is because you are around. You are the quiet hero every great game needs.',
+'Physical Games Point of Contact':'Your energy is contagious and everyone loves being around it. The games will be buzzing simply because you are there.',
+'Games Assistant':'You are the dependable one everyone wishes they had on their team. Every game runs better with you beside it.',
+'Sponsor Relations Lead':'You make people feel valued and proud to be part of something, and that is a true gift. Our sponsors will feel like family because of you.',
+'Crisis Team Head (Overall)':'You are the calmest, steadiest person we know, and everyone breathes easier knowing you are here. That is real leadership.',
+'Crisis Response – Recreation Areas':'Parents can relax and kids can play freely, all because you are watching out. That trust was easy to give you.',
+'Medical & Emergency Response':'You are the person everyone trusts when it matters most. Knowing you are here makes the whole day feel safer.',
+'Tech Control Room In-Charge':'You make the impossible run smoothly, and you make it look easy. The whole event runs on your genius.',
+'Tech Support':'You fix things so fast people barely notice there was a problem. That is true talent, and the day runs smoothly because of you.'};
+const capFor=role=>CAP[role]||(role.startsWith('Guide Team Lead')?CAP['Guide Team Lead']:'We picked you for this because we knew you would make it shine. Oppam is better with you in it.');
+const HEADCAP='Every team, every role and every smile today grows from your vision. Everyone here is proud to be on your team.';
+
+Object.assign(CAP,{
+'Event Head':HEADCAP,
+'Carnival Area Head':'Every corner where families play and explore answers to you. You turn the whole carnival into the happiest place at Oppam.',
+'Lifelab Executive':'You make curious minds feel welcome and brilliant. Students will remember the experiments you helped spark.',
+'Maths Stall Executive':'Only you could make people fall in love with maths in one visit. Your stall is about to change some minds, and you will enjoy every bit.',
+'Games Head (XandY Games & Decathlon Games)':'Every bit of laughter across the venue leads back to you. You were the obvious choice to bring the fun to Oppam.',
+'Decathlon Game Head':'Your energy is contagious and everyone loves being around it. The Decathlon games will be buzzing because you are leading them.',
+'Testimonials Coordinator':'People open up to you because you truly listen. The warmest stories about Oppam will be the ones you help families share.',
+'Tech Crisis Response':'When something goes wrong, you are already fixing it. Calm, quick and brilliant: the event is safe in your hands.',
+'Crisis Response – Carnival Area':'Parents can relax and kids can play freely, all because you are watching out. That trust was easy to give you.'});
+
+const DIVS=[
+ {n:'Arrival Section',c:'#3a57a8',on:'#fff',t:'#2c4590',s:'#e9eefa'},
+ {n:'Family Meet Area',c:'#ef4a5a',on:'#fff',t:'#c22e3e',s:'#fdeaec'},
+ {n:'Carnival Area',c:'#7a5bd1',on:'#fff',t:'#5a3fb0',s:'#efeafb'},
+ {n:'Food & Refreshment',c:'#fac511',on:'#262c5c',t:'#7a5c00',s:'#fff6d6'},
+ {n:'Sponsors & Externals',c:'#1f9d6b',on:'#fff',t:'#13744e',s:'#e3f5ec'},
+ {n:'Others',c:'#424a73',on:'#fff',t:'#424a73',s:'#eceef5'}];
+const ALLDIV={n:'All divisions',c:'#fac511',on:'#262c5c',t:'#7a5c00',s:'#fff6d6'};
+const ICON={'Oppam – All teams':'crown','Registration':'clipboard-check','Help Desk – Entrance':'info','Help Desk – Venue':'map-pin','Stage':'mic','Seating':'armchair','Gifts & Awards':'gift','Media':'camera','Participant Lounge':'sofa','Food & Refreshments':'utensils','Prayer Hall':'moon-star','Carnival Area – Overall':'ferris-wheel','Expo Zone':'tent','Lifelab':'flask-conical','Career Stall':'briefcase','Maths Stall':'sigma','Sales':'shopping-bag','Aesthetic Zone':'sparkles','RC Arena':'car','XandY Games':'gamepad-2','Decathlon Games':'dumbbell','Sponsors':'handshake','Crisis Team':'shield-plus','Tech Control Room':'monitor'};
+const LEVEL={'event head':0,'section in-charge':1,'team lead':2,'member':3};
+const MARK=['Event head','In-charge','Team lead',''];
+const KEYS=[['Havas KV','Event head','crown'],['Roshan K','Event head','crown'],['Niyas','Crisis & emergencies','shield-plus'],['Sahad','Medical help','heart-pulse'],['Ajmal KA','Tech, screens & sound','monitor'],['Savin K','Venue help desk','map-pin'],['Faiez Ahammed','Registration & logistics','clipboard-check'],['Yaseen','Food','utensils'],['Ziyan','Carnival area','ferris-wheel']];
+
+const clean=s=>s==null?'':String(s).replace(/\s+/g,' ').trim();
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const slug=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+const isOpen=n=>/^(sales|mentor|salesperson|hr intern) \d+/i.test(n);
+const first=n=>n.toLowerCase().split(' ')[0];
+
+/* ---------- build teams, people and duties ---------- */
+const TEAMS={},TORDER=[];
+function team(n){n=clean(n)||'Unassigned';if(!TEAMS[n]){TEAMS[n]={n,id:slug(n),ic:ICON[n]||'users',duties:[],cover:[],divs:{}};TORDER.push(n)}return TEAMS[n]}
+const capName=n=>n.replace(/\.(\s|$)/g,' ').replace(/\s+/g,' ').trim().split(' ').map(w=>w?w[0].toUpperCase()+w.slice(1):w).join(' ');
+const rows=ROWS.map(r=>({name:capName(clean(r[0])),role:clean(r[1]),team:clean(r[2]),also:clean(r[3]),pos:clean(r[4])||'Member',up:clean(r[5]),phone:clean(r[6]),dept:clean(r[7]),div:clean(r[8])})).filter(r=>r.name);
+rows.forEach(r=>team(r.team));
+const teamNames=()=>Object.keys(TEAMS);
+function matchTeam(tok){
+  tok=clean(tok.replace(/^(also|covers?|and)\s+/i,''));if(!tok)return null;
+  const tl=tok.toLowerCase(),ns=teamNames();
+  return ns.find(n=>n.toLowerCase()===tl)||ns.find(n=>n.toLowerCase().includes(tl))||ns.find(n=>n.toLowerCase().split(/\W+/).includes(first(tok)))||tok;
+}
+rows.forEach(r=>r.alsoT=r.also?[...new Set(r.also.split(/,|;|\//).map(matchTeam).filter(Boolean))]:[]);
+/* a short name in a covered team is the same person (e.g. "Nabeel" in Tech is "Nabeel Nazer") */
+const ALIAS={};
+rows.forEach(r=>{if(isOpen(r.name))return;r.alsoT.forEach(tn=>rows.forEach(x=>{if(x.team===tn&&!x.name.includes(' ')&&x.name.toLowerCase()===first(r.name)&&x.name!==r.name)ALIAS[x.name]=r.name}))});
+const P={},D=[];
+rows.forEach((r,i)=>{
+  const open=isOpen(r.name),name=ALIAS[r.name]||r.name,k=open?'s-'+slug(r.team)+'-'+slug(name):'p-'+slug(name);
+  const p=P[k]=P[k]||{k,name,open,duties:[],phone:'',dept:''};
+  if(!p.phone&&r.phone)p.phone=r.phone;if(!p.dept&&r.dept)p.dept=r.dept;
+  const lv=LEVEL[r.pos.toLowerCase()]??3;
+  const d={i,k,role:r.role,t:team(r.team),also:r.alsoT.map(team),lv,upRaw:r.up,div:r.div};
+  p.duties.push(d);D.push(d);d.t.duties.push(d);if(r.div&&r.div!=='All divisions')d.t.divs[r.div]=(d.t.divs[r.div]||0)+1;
+  d.also.forEach(x=>{x.cover.push(d);if(r.div)x.divs[r.div]=(x.divs[r.div]||0)+.1});
+});
+Object.values(P).forEach(p=>p.duties.sort((a,b)=>a.lv-b.lv));
+const HEADS=Object.values(P).filter(p=>p.duties.some(d=>d.lv===0)).map(p=>p.k);
+const named=Object.values(P).filter(p=>!p.open);
+function findPerson(tok){
+  tok=clean(tok);const tl=tok.toLowerCase();if(!tl)return null;
+  if(ALIAS[tok])tok=ALIAS[tok];
+  let m=named.find(p=>p.name.toLowerCase()===tl)||named.find(p=>p.name.toLowerCase().startsWith(tl+' '));
+  if(!m){const c=named.filter(p=>first(p.name)===first(tok));if(c.length===1)m=c[0]}
+  return m?m.k:null;
+}
+function ghost(n){const k='g-'+slug(n);P[k]=P[k]||{k,name:n,open:false,ghost:true,duties:[],phone:'',dept:''};return k}
+D.forEach(d=>{
+  let ks=[];
+  if(d.upRaw)d.upRaw.split(/\s*(?:&|,|\/|\band\b)\s*/i).forEach(x=>{if(!clean(x))return;if(/^event heads?$/i.test(clean(x)))ks.push(...HEADS);else ks.push(findPerson(x)||ghost(clean(x)))});
+  d.up=[...new Set(ks)].filter(x=>x!==d.k);
+});
+TORDER.forEach(n=>{const t=TEAMS[n],e=Object.entries(t.divs).sort((a,b)=>b[1]-a[1]);t.div=n==='Oppam – All teams'?ALLDIV:(DIVS.find(x=>x.n===(e[0]&&e[0][0]))||DIVS[5])});
+const divOf=d=>d?d.t.div:ALLDIV;
+const primary=k=>P[k].duties[0];
+
+if(!window.claude)document.documentElement.classList.add('web');
+/* ---------- state ---------- */
+let C={},M={},db=null,canWrite=true,canEdit=false,me=null,viewing=null,duty=0,screen='find',dirMode='tree',sheetStack=[],cur=null,mEditing=false,loaded=false,swung=false;
+const store={get(){try{return localStorage.getItem('oppam-me')}catch(_){return null}},set(v){try{v?localStorage.setItem('oppam-me',v):localStorage.removeItem('oppam-me')}catch(_){}}};
+{const s=store.get();if(s&&P[s]&&!P[s].ghost){me=s;screen='role'}}
+if(location.hash==='#directory')screen='dir';
+
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+const contact=k=>{const c=C[k]||{},p=P[k]||{};return {phone:c.phone||p.phone||'',dept:c.dept||p.dept||''}};
+const nameOf=k=>P[k]?P[k].name:'';
+const initials=n=>{if(isOpen(n))return n.match(/\d+/)[0];const w=n.replace(/\(.*?\)/g,'').trim().split(/\s+/);return (w[0][0]+(w[1]?w[1][0]:'')).toUpperCase()};
+function icons(){try{window.lucide&&lucide.createIcons()}catch(e){}}
+function av(k){const p=P[k],ph=divOf(p.duties[0]);if(!p.open&&p.duties[0]&&p.duties[0].lv===0)return '<span class="av" style="--s:#fac511;--t:#262c5c"><i data-lucide="crown"></i></span>';return `<span class="av${p.open?' open':''}" style="--s:${ph.s};--t:${ph.t}">${esc(initials(p.name))}</span>`}
+const tel=ph=>'tel:'+String(ph).replace(/[^\d+]/g,'');
+function call(k){const ph=contact(k).phone;if(!ph)return '<span class="nocall">No number yet</span>';return `<a class="call" href="${esc(tel(ph))}" data-stop aria-label="Call ${esc(nameOf(k))} on ${esc(ph)}"><i data-lucide="phone"></i><span class="num">${esc(ph)}</span></a>`}
+function dutyIn(k,t){return P[k].duties.find(d=>d.t===t)}
+function roleText(k,t){const p=P[k];if(p.ghost)return 'Role not in the sheet yet';const d=(t&&dutyIn(k,t))||p.duties[0];return d.role+(t&&d.t!==t?' · '+d.t.n:'')}
+function mark(lv){return lv<3&&lv>=0?`<span class="mark lv${lv}">${MARK[lv]}</span>`:''}
+function prow(k,sub,o={}){
+  const p=P[k],dept=contact(k).dept;
+  return `<div class="prow${o.big?' big':''}${p.ghost?' ghost':''}" ${p.ghost?'':`data-p="${esc(k)}" tabindex="0"`} ${o.d!=null?`style="--d:${o.d}"`:''}>${av(k)}<span><b>${esc(p.name)}</b>${o.lv!=null?mark(o.lv):''}${k===me?'<span class="mark you">You</span>':''}<span class="rl">${esc(sub)}</span>${dept?`<span class="dp">${esc(dept)}</span>`:''}</span>${call(k)}${p.ghost?'':`<button class="ico" data-editp="${esc(k)}" aria-label="Edit ${esc(p.name)}'s contact" title="Edit contact"><i data-lucide="pencil"></i></button>`}</div>`;
+}
+function toast(msg){const t=$('toast');t.textContent=msg;t.hidden=false;clearTimeout(toast.h);toast.h=setTimeout(()=>t.hidden=true,3800)}
+/* who reports to k, anywhere */
+const reportsTo=k=>D.filter(d=>d.up.includes(k)&&d.k!==k);
+/* the team as a tree: roots are those whose head sits outside the team */
+function teamTree(t){
+  const byP={};t.duties.forEach(d=>(byP[d.k]=byP[d.k]||[]).push(d));
+  const ds=Object.values(byP).map(xs=>{xs.sort((a,b)=>a.lv-b.lv);xs[0].roles=xs.map(x=>x.role).join(' · ');return xs[0]});
+  const inTeam=new Set(ds.map(d=>d.k)),seen=new Set(),out=[];
+  const parentOf=d=>d.up.find(u=>inTeam.has(u)&&u!==d.k);
+  const kids=pk=>ds.filter(d=>parentOf(d)===pk);
+  const walk=(d,depth)=>{if(seen.has(d))return;seen.add(d);out.push({d,depth});kids(d.k).forEach(c=>walk(c,depth+1))};
+  ds.filter(d=>!parentOf(d)).sort((a,b)=>a.lv-b.lv).forEach(d=>walk(d,0));
+  ds.forEach(d=>walk(d,0));
+  return out;
+}
+function above(t){
+  const inTeam=new Set(t.duties.map(d=>d.k)),res=[],seen=new Set();
+  let q=[];t.duties.forEach(d=>d.up.forEach(u=>{if(!inTeam.has(u))q.push(u)}));
+  while(q.length){const u=q.shift();if(seen.has(u))continue;seen.add(u);res.push(u);P[u].duties.forEach(d=>d.up.forEach(x=>q.push(x)))}
+  const lv=k=>P[k].duties.length?P[k].duties[0].lv:5;
+  return res.sort((a,b)=>lv(a)-lv(b));
+}
+function teamBlock(t,k){
+  const ph=t.div,ab=above(t),tr=teamTree(t);
+  let h='';
+  if(ab.length)h+=`<div class="subh" style="--c:${ph.c}"><i data-lucide="arrow-up-narrow-wide"></i>Heads above this section</div>`+ab.map(x=>prow(x,roleText(x),{lv:P[x].duties[0]?P[x].duties[0].lv:3})).join('');
+  h+=`<div class="subh" style="--c:${ph.c}"><i data-lucide="${t.ic}"></i>${esc(t.n)} · ${tr.length} ${tr.length===1?'person':'people'}</div><div class="tree">`+tr.map(({d,depth})=>prow(d.k,d.roles||d.role,{lv:d.lv,d:depth})).join('')+'</div>';
+  const cov=t.cover.filter(d=>!t.duties.some(x=>x.k===d.k));if(cov.length)h+=`<div class="subh" style="--c:${ph.c}"><i data-lucide="link"></i>Also covering this section</div>`+cov.map(d=>prow(d.k,d.role+' · '+d.t.n,{lv:d.lv})).join('');
+  return h;
+}
+
+/* ---------- search ---------- */
+function find(q){
+  q=q.trim().toLowerCase();if(!q)return [];
+  const out=[];
+  Object.values(P).forEach(p=>{if(p.ghost)return;const n=p.name.toLowerCase(),txt=(n+' '+contact(p.k).dept+' '+p.duties.map(d=>d.role+' '+d.t.n).join(' ')).toLowerCase();if(txt.includes(q))out.push({k:p.k,s:n.startsWith(q)?3:n.split(' ').some(w=>w.startsWith(q))?2:0})});
+  TORDER.forEach(n=>{if(n.toLowerCase().includes(q))out.push({team:n,s:1})});
+  return out.sort((a,b)=>b.s-a.s).slice(0,14);
+}
+function resultsHTML(list,q){
+  if(!q.trim())return '';
+  if(!list.length)return `<div class="empty">No one called “${esc(q)}” yet. Try just your first name.</div>`;
+  return list.map((x,i)=>{
+    if(x.team){const t=TEAMS[x.team];return `<button class="ri" data-i="${i}" style="--c:${t.div.c}"><span class="bar6"></span><span><b>${esc(t.n)}</b><small>Section · ${esc(t.div.n)}</small></span><i class="go" data-lucide="chevron-right"></i></button>`}
+    const p=P[x.k];return `<button class="ri" data-i="${i}" style="--c:${divOf(p.duties[0]).c}"><span class="bar6"></span><span><b>${esc(p.name)}</b><small>${p.duties.map(d=>esc(d.role)+' · '+esc(d.t.n)).join('<br>')}</small></span><i class="go" data-lucide="chevron-right"></i></button>`;
+  }).join('');
+}
+let hits=[],hitAct=0;
+function bindSearch(input,out,onPick){
+  const go=()=>{hits=find(input.value);hitAct=0;out.innerHTML=resultsHTML(hits,input.value);out.hidden=!input.value.trim();icons()};
+  input.addEventListener('input',go);
+  input.addEventListener('focus',()=>{if(input.value.trim())go()});
+  input.addEventListener('keydown',e=>{
+    if(e.key==='Enter'){e.preventDefault();if(hits.length)onPick(hits[hitAct]||hits[0])}
+    if(e.key==='Escape'){out.hidden=true}
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();if(!hits.length)return;hitAct=(hitAct+(e.key==='ArrowDown'?1:-1)+hits.length)%hits.length;out.querySelectorAll('.ri').forEach((b,i)=>b.classList.toggle('act',i===hitAct))}
+  });
+  out.addEventListener('click',e=>{const b=e.target.closest('.ri');if(b)onPick(hits[+b.dataset.i])});
+}
+
+/* ---------- the badge ---------- */
+function badge(k,di,demo){
+  const p=demo?null:P[k],d=demo?null:p.duties[di],ph=demo?DIVS[0]:divOf(d),c=demo?{}:contact(k);
+  const logo=ph.on==='#fff'?'oppam-logo-white.png':'oppam-logo.png';
+  const ic=demo?'users':d.t.ic;
+  const roles=demo?[]:p.duties;
+  return `<div class="lanyard${(!swung||demo)?' swing':''}${demo?' demo':''}" style="--c:${ph.c};--on:${ph.on};--t:${ph.t};--s:${ph.s}">
+    <div class="strap" aria-hidden="true"><span>${Array(6).fill('OPPAM').join(' · ')}</span></div><div class="clip" aria-hidden="true"></div><div class="ring" aria-hidden="true"></div>
+    <article class="badge" aria-label="Badge">
+      <div class="b-head"><span class="slot" aria-hidden="true"></span>
+        <div class="hr"><img src="${logo}" alt="Oppam"><span class="dv">${demo?'Your division':esc(ph.n)}</span></div>
+        <span class="ghost" aria-hidden="true"><i data-lucide="${ic}"></i></span></div>
+      <div class="b-photo" aria-hidden="true">${demo?'<i data-lucide="user-round"></i>':d.lv===0?'<i data-lucide="crown"></i>':esc(initials(p.name))}</div>
+      <div class="b-body">
+        <div class="b-name">${esc(demo?'Your name':p.name)}</div>
+        <div class="b-role">${esc(demo?'Your role at Oppam':d.role)}</div>
+        <div class="b-team"><i data-lucide="${ic}"></i>${esc(demo?'Your section':d.lv===0?'Leads every section':d.t.n)}</div>
+        ${roles.length>1?`<div class="b-roles"><span class="lbl">${roles.length} roles at Oppam</span>${roles.map((x,i)=>`<button class="b-r${i===di?' on':''}" data-duty="${i}" style="--c:${divOf(x).c}"><span class="dot"></span><span><b>${esc(x.role)}</b><small>${esc(x.t.n)}</small></span></button>`).join('')}</div>`:''}
+        <p class="b-cap">${esc(demo?'You were picked for a reason. Type your name to see the role we saved for you.':capFor(d.role))}</p>
+      </div>
+      <div class="b-stub">${demo?'<span class="who">Reporting head and team inside</span>':`<span>${mark(d.lv)} ${k===me?'<span class="mark you">You</span> ':''}${c.dept?`<span class="who">${esc(c.dept)}</span>`:''}</span>${call(k)}`}</div>
+      <div class="b-brand"><span>Presented by</span><img src="xandy-logo.png" alt="XandY Learning"></div>
+      <div class="b-stripe" aria-hidden="true"><i style="background:#424a73"></i><i style="background:#fac511"></i><i style="background:#ef4a5a"></i></div>
+    </article></div>`;
+}
+
+/* ---------- screens ---------- */
+function findScreen(){
+  return `<section class="find in">
+    <div class="logos"><img class="op" src="oppam-logo.png" alt="Oppam, XandY Family Meet"><img class="xy" src="xandy-logo.png" alt="XandY Learning"></div>
+    <div class="fgrid">
+      <div>
+        <h1>Collect your <em>Oppam</em> badge</h1>
+        <p class="lede">Type your name to see your role, your reporting head and the team you'll work with on the day.</p>
+        <label class="l" for="q1">Your name</label>
+        <div class="sbox"><i data-lucide="search"></i><input id="q1" type="search" placeholder="e.g. Hannah" autocomplete="off"></div>
+        <div class="list" id="r1" hidden></div>
+        <div class="more"><button class="link" data-go="dir"><i data-lucide="network"></i>See how the whole team is organised</button></div>
+      </div>
+      <div class="preview">${badge(null,0,true)}</div>
+    </div></section>`;
+}
+function topBar(){
+  return `<header class="bar"><div class="in">
+    <img class="op" src="oppam-logo.png" alt="Oppam, XandY Family Meet" data-go="${me?'role':'find'}" role="link" tabindex="0">
+    <div class="sbox"><i data-lucide="search"></i><input id="q2" type="search" placeholder="Search anyone, a role or a section" autocomplete="off" aria-label="Search anyone, a role or a section"><div class="drop" id="r2" hidden></div></div>
+    ${screen==='dir'?`<button class="btn dark" data-go="${me?'role':'find'}"><i data-lucide="id-card"></i><span>${me?'My badge':'Find my badge'}</span></button>`:`<button class="btn" data-go="dir"><i data-lucide="network"></i><span>Directory</span></button>`}
+  </div></header>`;
+}
+function roleScreen(){
+  const k=viewing||me,self=!viewing,p=P[k];
+  if(duty>=p.duties.length)duty=0;
+  const d=p.duties[duty],t=d.t,you=self?'you':esc(p.name.split(' ')[0]);
+  let h=`<main class="in page">`;
+  if(!self)h+=`<div class="viewing"><span>You're looking at <b>${esc(p.name)}</b>'s badge.</span><div>${me?`<button class="btn" data-go="role"><i data-lucide="arrow-left"></i>Back to mine</button>`:''}<button class="btn sun" data-me="${esc(k)}"><i data-lucide="check"></i>This is me</button></div></div>`;
+  h+=`<div class="rgrid"><div class="rleft">`+badge(k,duty);
+  h+=`<div class="bacts"><button class="btn" data-manual="${d.lv===0?'general':t.id}"><i data-lucide="book-open"></i>Manual</button><button class="btn" data-editp="${esc(k)}"><i data-lucide="pencil"></i>Edit contact</button></div>`;
+  if(self)h+=`<div class="notyou"><button class="link" data-change><i data-lucide="repeat"></i>Not you? Change name</button></div>`;
+  h+=`</div><div class="rright">`;
+  if(p.duties.length>1)h+=`<div class="rtabs" role="tablist" aria-label="Roles">${p.duties.map((x,i)=>`<button role="tab" data-duty="${i}" aria-selected="${i===duty}" style="--c:${divOf(x).c}"><i data-lucide="${x.t.ic}"></i><span><b>${esc(x.role)}</b><small>${esc(x.t.n)}</small></span></button>`).join('')}</div>`;
+  /* reporting head */
+  if(d.lv===0){
+    const co=HEADS.filter(x=>x!==k);
+    if(co.length)h+=`<section class="sec"><div class="sh"><h2>Leading with ${you}</h2><span class="meta">event heads</span></div>${co.map(x=>prow(x,roleText(x),{lv:0,big:1})).join('')}</section>`;
+  }else{
+    if(d.up.length)h+=`<section class="sec"><div class="sh"><h2>Reporting head</h2><span class="meta">for ${esc(d.role)}</span></div>${d.up.map(x=>prow(x,roleText(x),{lv:P[x].duties[0]?P[x].duties[0].lv:3,big:1})).join('')}</section>`;
+  }
+  /* reporting to them */
+  const rs=reportsTo(k);
+  if(rs.length){
+    const by={};rs.forEach(x=>(by[x.t.n]=by[x.t.n]||[]).push(x));
+    h+=`<section class="sec"><div class="sh"><h2>Reporting to ${you}</h2><span class="meta">${rs.length} ${rs.length===1?'person':'people'}</span></div>`+Object.entries(by).map(([n,xs])=>{const tt=TEAMS[n];return `<div class="subh" style="--c:${tt.div.c}"><i data-lucide="${tt.ic}"></i>${esc(n)}</div>`+xs.sort((a,b)=>a.lv-b.lv).map(x=>prow(x.k,x.role,{lv:x.lv})).join('')}).join('')+'</section>';
+  }
+  /* full section */
+  if(d.lv>0)h+=`<section class="sec" style="--c:${t.div.c}"><div class="sh"><h2>${self?'Your':'Their'} section</h2><span class="meta"><button class="link" data-manual="${t.id}" style="min-height:0"><i data-lucide="book-open"></i>Manual</button></span></div>${teamBlock(t,k)}</section>`;
+  h+=`<section class="sec"><details class="kdet"><summary class="btn sun full"><i data-lucide="phone-call"></i>Important contacts<i class="chev" data-lucide="chevron-down"></i></summary><div class="kbody">${keysList()}</div></details></section>`;
+  return h+'</div></div></main>'+footer();
+}
+function footer(){return `<footer class="foot in"><img src="xandy-logo.png" alt="XandY Learning"><span>Oppam · XandY Family Meet</span></footer>`}
+function keysList(){return KEYS.map(([n,lab])=>{const k=findPerson(n);return k?prow(k,lab+' · '+roleText(k)):''}).join('')}
+function dirScreen(){
+  const tabs=[['tree','network','Structure'],['dept','building-2','Departments'],['all','book-user','Everyone']];
+  const people=Object.values(P).filter(p=>!p.ghost);
+  let h=`<main class="in page"><div class="dh"><h1>How Oppam is organised</h1><p>${DIVS.length} divisions, ${TORDER.length-1} sections and ${people.length} people and open slots. Tap a section to see everyone in it.</p></div>
+  <div class="utabs" role="tablist">${tabs.map(([m,ic,l])=>`<button role="tab" data-dir="${m}" aria-selected="${dirMode===m}"><i data-lucide="${ic}"></i>${l}</button>`).join('')}</div>`;
+  if(dirMode==='tree'){
+    h+=`<div class="heads">${HEADS.map(x=>`<div class="headrow" data-p="${x}" tabindex="0">${av(x)}<span><b style="font:700 19px Rubik,sans-serif">${esc(nameOf(x))}</b><br><span style="color:var(--mute);font-size:15px">Event head${contact(x).dept?' · '+esc(contact(x).dept):''}</span></span>${call(x)}</div>`).join('')}</div>`;
+    h+=DIVS.map(ph=>{const ts=TORDER.map(n=>TEAMS[n]).filter(x=>x.div===ph);if(!ts.length)return '';const n=new Set(ts.flatMap(x=>x.duties.map(d=>d.k))).size;return `<section class="stage" style="--c:${ph.c};--t:${ph.t}"><div class="sl"><span class="dot"></span><span><h2>${ph.n}</h2><small>${ts.length} sections · ${n} people</small></span></div><div>${ts.map(x=>{const tr=teamTree(x),roots=tr.filter(r=>r.depth===0&&r.d.lv<3).map(r=>nameOf(r.d.k));return `<button class="trow" data-team="${esc(x.n)}"><i data-lucide="${x.ic}"></i><b>${esc(x.n)}</b><span class="lead">${roots.length?esc([...new Set(roots)].join(' & ')):x.cover.length?'Covered by '+esc(x.cover.map(c=>nameOf(c.k)).join(' & ')):'Head to be named'}</span><span class="ct">${x.duties.length||''}</span><i class="go" data-lucide="chevron-right"></i></button>`}).join('')}</div></section>`}).join('');
+  }else if(dirMode==='dept'){
+    const g={};people.forEach(p=>{const d=contact(p.k).dept||'Department not added yet';(g[d]=g[d]||[]).push(p.k)});
+    const names=Object.keys(g).sort((a,b)=>(a.startsWith('Department not')-b.startsWith('Department not'))||a.localeCompare(b));
+    h+=names.map(n=>`<section class="dgrp"><div class="sh"><h2>${esc(n)}</h2><span class="meta">${g[n].length} ${g[n].length===1?'person':'people'}</span></div><div class="cols2">${g[n].sort((a,b)=>P[a].open-P[b].open||P[a].name.localeCompare(P[b].name,undefined,{numeric:true})).map(k=>prow(k,P[k].duties.map(d=>d.role+' · '+d.t.n).join(' / '),{lv:P[k].duties[0].lv})).join('')}</div></section>`).join('');
+  }else{
+    const ks=people.map(p=>p.k).sort((a,b)=>P[a].open-P[b].open||P[a].name.localeCompare(P[b].name,undefined,{numeric:true}));
+    const g={};ks.forEach(k=>{const L=P[k].open?'Open slots, names to be confirmed':P[k].name[0].toUpperCase();(g[L]=g[L]||[]).push(k)});
+    h+=Object.entries(g).map(([L,ks])=>`<div class="letter">${esc(L)}</div><div class="cols2">${ks.map(k=>prow(k,P[k].duties.map(d=>d.role+' · '+d.t.n).join(' / '),{lv:P[k].duties[0].lv})).join('')}</div>`).join('');
+  }
+  return h+'</main>'+footer();
+}
+function render(){
+  const y=scrollY;
+  $('app').innerHTML=screen==='find'?findScreen():topBar()+(screen==='dir'?dirScreen():roleScreen());
+  if(screen==='find')bindSearch($('q1'),$('r1'),pickSelf);else bindSearch($('q2'),$('r2'),pickOther);
+  icons();if(screen==='role')setTimeout(()=>swung=true,1500);return y;
+}
+function show(s){screen=s;try{history.replaceState(null,'',s==='dir'?'#directory':location.pathname+location.search)}catch(_){}render();scrollTo(0,0)}
+
+/* ---------- picking ---------- */
+function setMe(k){me=k;viewing=null;duty=0;swung=false;store.set(k);closeSheet();show('role');toast('Badge saved on this device. Next time you open the link, it opens right here.')}
+function pickSelf(x){if(x.team){openSheet('team',x.team);return}setMe(x.k)}
+function pickOther(x){$('r2').hidden=true;$('q2').value='';if(x.team){openSheet('team',x.team);return}openPerson(x.k)}
+function openPerson(k){if(!P[k]||P[k].ghost)return;closeSheet();viewing=k===me?null:k;duty=0;swung=false;show('role')}
+
+/* ---------- sheets ---------- */
+function openSheet(kind,id,push=true){
+  if(push&&$('sheet').classList.contains('on')&&cur)sheetStack.push(cur);
+  cur={kind,id};$('sback').style.visibility=sheetStack.length?'visible':'hidden';
+  $('sbody').innerHTML=kind==='team'?teamSheet(TEAMS[id]):kind==='manual'?manualSheet(id):kind==='edit'?editSheet(id):keysSheet();
+  $('sheet').classList.add('on');$('scrim').classList.add('on');$('sbody').scrollTop=0;icons();
+  if(kind==='edit'){const f=$('f-phone');f&&setTimeout(()=>f.focus(),260)}
+}
+function closeSheet(){$('sheet').classList.remove('on');$('scrim').classList.remove('on');sheetStack=[];mEditing=false;cur=null}
+function head(c,t,kick,title,sub){return `<div class="stitle" style="--c:${c};--t:${t}"><span class="k">${kick}</span><h2>${title}</h2>${sub?`<p>${sub}</p>`:''}</div>`}
+function teamSheet(t){return head(t.div.c,t.div.t,`<i data-lucide="${t.ic}"></i>${esc(t.div.n)}`,esc(t.n))+`<button class="btn" data-manual="${t.id}"><i data-lucide="book-open"></i>Instruction manual</button>`+teamBlock(t)}
+function keysSheet(){
+  return head('#fac511','#7a5c00','<i data-lucide="phone-call"></i>Save these numbers','Important contacts','Who to call on the day, whatever your role.')+KEYS.map(([n,lab])=>{const k=findPerson(n);return k?prow(k,lab+' · '+roleText(k)):''}).join('');
+}
+function editSheet(k){
+  const c=contact(k),p=P[k],ph=divOf(p.duties[0]);
+  return head(ph.c,ph.t,'<i data-lucide="pencil"></i>Edit contact',esc(p.name),'Everyone who opens this page will see these details.')+
+  `<form class="form" id="cf" data-k="${esc(k)}">
+  <label>Phone number<input id="f-phone" type="tel" inputmode="tel" maxlength="20" value="${esc(c.phone)}" placeholder="+91 98765 43210"></label>
+  <label>Department<input id="f-dept" maxlength="40" list="depts" value="${esc(c.dept)}" placeholder="Department"></label>
+  <datalist id="depts">${[...new Set(Object.values(P).map(x=>x.dept).filter(Boolean))].sort().map(x=>`<option value="${esc(x)}">`).join('')}</datalist>
+  <div class="fr"><span class="err" id="ferr"></span><button type="button" class="btn" data-close>Cancel</button><button class="btn dark" id="fsave"><i data-lucide="check"></i>Save contact</button></div></form>`;
+}
+function manualHTML(txt){
+  const out=[];let list=null;
+  String(txt).split(/\r?\n/).forEach(line=>{const l=line.trim();if(/^[-*•]\s+/.test(l)){if(!list){list=[];out.push(list)}list.push(l.replace(/^[-*•]\s+/,''))}else{list=null;if(l)out.push(l)}});
+  return out.map(x=>Array.isArray(x)?`<ul>${x.map(i=>`<li>${esc(i)}</li>`).join('')}</ul>`:`<p>${esc(x)}</p>`).join('');
+}
+function manualSheet(id){
+  const t=Object.values(TEAMS).find(x=>x.id===id),ph=t?t.div:ALLDIV,m=M[id]||{};
+  let h=head(ph.c,ph.t,'<i data-lucide="book-open"></i>Instruction manual',esc(t?t.n:'Oppam, all sections'));
+  if(mEditing)return h+`<form class="form" id="mf" data-id="${esc(id)}"><label>Manual <span class="hint">Start a line with - for a bullet point</span><textarea id="m-text" maxlength="20000">${esc(m.text||'')}</textarea></label><div class="fr"><span class="err" id="merr"></span><button type="button" class="btn" data-mcancel>Cancel</button><button class="btn dark" id="msave"><i data-lucide="check"></i>Save manual</button></div></form>`;
+  h+=m.text?`<div class="manual">${manualHTML(m.text)}</div>`:`<div class="soon"><b>${!loaded&&db?'Loading the manual…':'The manual is on its way'}</b>${!loaded&&db?'':'It will appear here before the day.'}</div>`;
+  if(canEdit)h+=`<p style="margin-top:18px"><button class="btn" data-medit><i data-lucide="pencil"></i>${m.text?'Edit manual':'Write manual'}</button></p>`;
+  return h;
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click',e=>{
+  if(e.target.closest('[data-stop]'))return;
+  const r2=$('r2');if(r2&&!e.target.closest('.bar .sbox'))r2.hidden=true;
+  const ep=e.target.closest('[data-editp]');if(ep){e.stopPropagation();openSheet('edit',ep.dataset.editp,!!cur);return}
+  const go=e.target.closest('[data-go]');if(go){const s=go.dataset.go;if(s==='role'){viewing=null;duty=0}closeSheet();show(s);return}
+  const mm=e.target.closest('[data-me]');if(mm){setMe(mm.dataset.me);return}
+  if(e.target.closest('[data-change]')){me=null;viewing=null;store.set(null);show('find');setTimeout(()=>$('q1')&&$('q1').focus(),50);return}
+  if(e.target.closest('[data-keys]')){openSheet('keys');return}
+  const dd=e.target.closest('[data-duty]');if(dd){duty=+dd.dataset.duty;render();return}
+  const dm=e.target.closest('[data-dir]');if(dm){dirMode=dm.dataset.dir;render();return}
+  if(e.target.closest('#sclose')||e.target.closest('[data-close]')||e.target.id==='scrim'){closeSheet();return}
+  if(e.target.closest('#sback')){const s=sheetStack.pop();mEditing=false;if(s)openSheet(s.kind,s.id,false);return}
+  if(e.target.closest('[data-medit]')){mEditing=true;openSheet('manual',cur.id,false);return}
+  if(e.target.closest('[data-mcancel]')){mEditing=false;openSheet('manual',cur.id,false);return}
+  const mn=e.target.closest('[data-manual]');if(mn){mEditing=false;openSheet('manual',mn.dataset.manual,!!cur);return}
+  const tm=e.target.closest('[data-team]');if(tm){openSheet('team',tm.dataset.team,!!cur);return}
+  const p=e.target.closest('[data-p]');if(p){openPerson(p.dataset.p);return}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet();if(e.key==='Enter'&&e.target.matches('.prow,.headrow,.bar .op'))e.target.click()});
+document.addEventListener('submit',async e=>{
+  e.preventDefault();
+  if(e.target.id==='cf'){
+    const k=e.target.dataset.k,err=$('ferr'),btn=$('fsave');
+    const phone=$('f-phone').value.trim(),dept=$('f-dept').value.trim();
+    if(phone&&!/^[+\d][\d\s()-]{5,19}$/.test(phone)){err.textContent='Use digits, spaces and + only.';return}
+    if(!db){err.textContent='Open this page while signed in to Claude to save contacts.';return}
+    if(!canWrite){err.textContent='You can view this page but not change contacts. Ask the organiser for edit access.';return}
+    const body={name:P[k].name,phone,dept,updatedAt:Date.now()};
+    btn.disabled=true;err.textContent='';
+    try{await db.collection('contacts').doc(k).set(body);C[k]=body;closeSheet();render();toast('Contact saved. Everyone can see it now.')}
+    catch(x){btn.disabled=false;if(x&&x.code==='invalid_argument'){canWrite=false;err.textContent='You can view this page but not change contacts. Ask the organiser for edit access.'}else err.textContent=x&&x.code==='quota_exceeded'?'Storage is full.':'Could not save. Try again.'}
+  }
+  if(e.target.id==='mf'){
+    const id=e.target.dataset.id,err=$('merr'),btn=$('msave');
+    if(!db){err.textContent='Open this page while signed in to Claude to save.';return}
+    btn.disabled=true;
+    try{const body={text:$('m-text').value,updatedAt:Date.now()};await db.collection('manuals').doc(id).set(body);M[id]=body;mEditing=false;openSheet('manual',id,false);toast('Manual saved.')}
+    catch(x){btn.disabled=false;err.textContent=x&&x.code==='invalid_argument'?'Only editors can change manuals.':'Could not save. Try again.'}
+  }
+});
+window.addEventListener('hashchange',()=>{if(location.hash==='#directory'&&screen!=='dir')show('dir')});
+render();
+if(screen==='find')setTimeout(()=>{const q=$('q1');q&&q.focus({preventScroll:true})},80);
+
+/* ---------- shared contacts and manuals ---------- */
+(async()=>{
+  try{
+    db=window.claude?await window.claude.use('db'):null;
+    const user=window.claude?await window.claude.use('user'):null;
+    if(!db)return;
+    try{const w=user?await user.can('data.write'):null;canWrite=w!==false}catch(_){}
+    try{canEdit=user?!!(await user.canEdit()):false}catch(_){}
+    const clean2=v=>{const o={};['phone','dept'].forEach(f=>o[f]=typeof v[f]==='string'?v[f].slice(0,80):'');return o};
+    const busy=()=>document.activeElement&&document.activeElement.matches('input,textarea');
+    const refresh=()=>{if(busy())return;const y=render();scrollTo(0,y);if(cur&&$('sheet').classList.contains('on')&&cur.kind!=='edit'&&!mEditing)openSheet(cur.kind,cur.id,false)};
+    db.collection('contacts').onSnapshot(s=>{const n={};s.docs.forEach(d=>n[d.id]=clean2(d.data()||{}));C=n;refresh()},()=>{});
+    db.collection('manuals').onSnapshot(s=>{const n={};s.docs.forEach(d=>{const v=d.data()||{};n[d.id]={text:typeof v.text==='string'?v.text:''}});M=n;if(!s.metadata.fromCache)loaded=true;refresh()},()=>{loaded=true});
+  }catch(_){}
+})();
+}
+
+</script>
+</body>
+</html>
